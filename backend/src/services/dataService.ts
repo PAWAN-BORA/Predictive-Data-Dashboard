@@ -13,20 +13,21 @@ type CategoryWiseParams = {
 type TrendParams = {
   year:number|undefined,
   category:string|undefined,
+  quarter:string|undefined,
 }
 type ComparisionParams = {
   year:number|undefined,
-  metric:"revenue"|"units"
+  metric:"revenue"|"units"|"profit"
   groupBy:string, 
 
 }
 type GrowthParams = {
-  metric:"revenue"|"units"
+  metric:"revenue"|"units"|"profit"
   groupBy:string, 
   category:string|undefined,
 }
 type ForecastParams = {
-  metric:"revenue"|"units"
+  metric:"revenue"|"units"|"profit"
   groupBy:string, 
   category:string|undefined,
 }
@@ -187,11 +188,9 @@ class DataService {
     }
 
     return {
-      data: {
-        labels,
-        values,
-        growth,
-      },
+      labels,
+      values,
+      growth,
     };
 
   }
@@ -288,14 +287,12 @@ class DataService {
     // }
 
     return {
-      data: {
         labels: [...labels, ...futureLabels],
         actual: [...values, ...Array(forecastPoints).fill(null)],
         predicted: [
           ...Array(values.length).fill(null),
           ...predictedValues,
         ],
-      },
     };
   }
   private async aggregateTrend(getkey:(item:Row)=>string, params:TrendParams){
@@ -303,7 +300,7 @@ class DataService {
     const data = await dataModel.getFilterData({
       year:params.year,
       category:params.category,
-      quarter:undefined
+      quarter:params.quarter
     })
     for (const item of data) {
       const key = getkey(item); 

@@ -14,3 +14,10 @@ export function formatValue(value: number): string {
   }
   return `${value}`;
 }
+
+export function formatLabel(label: string): string {
+  if (!label.includes("-")) return label;
+
+  const [year, quarter] = label.split("-");
+  return `${year.slice(2)}-${quarter}`;
+}

@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrendsRouteImport } from './routes/trends'
+import { Route as GrowthRouteImport } from './routes/growth'
+import { Route as ForecastRouteImport } from './routes/forecast'
+import { Route as ComparisonRouteImport } from './routes/comparison'
+import { Route as ComparisionRouteImport } from './routes/comparision'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TrendsRoute = TrendsRouteImport.update({
+  id: '/trends',
+  path: '/trends',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GrowthRoute = GrowthRouteImport.update({
+  id: '/growth',
+  path: '/growth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForecastRoute = ForecastRouteImport.update({
+  id: '/forecast',
+  path: '/forecast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComparisonRoute = ComparisonRouteImport.update({
+  id: '/comparison',
+  path: '/comparison',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComparisionRoute = ComparisionRouteImport.update({
+  id: '/comparision',
+  path: '/comparision',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,96 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/comparision': typeof ComparisionRoute
+  '/comparison': typeof ComparisonRoute
+  '/forecast': typeof ForecastRoute
+  '/growth': typeof GrowthRoute
+  '/trends': typeof TrendsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/comparision': typeof ComparisionRoute
+  '/comparison': typeof ComparisonRoute
+  '/forecast': typeof ForecastRoute
+  '/growth': typeof GrowthRoute
+  '/trends': typeof TrendsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/comparision': typeof ComparisionRoute
+  '/comparison': typeof ComparisonRoute
+  '/forecast': typeof ForecastRoute
+  '/growth': typeof GrowthRoute
+  '/trends': typeof TrendsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/comparision'
+    | '/comparison'
+    | '/forecast'
+    | '/growth'
+    | '/trends'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/comparision' | '/comparison' | '/forecast' | '/growth' | '/trends'
+  id:
+    | '__root__'
+    | '/'
+    | '/comparision'
+    | '/comparison'
+    | '/forecast'
+    | '/growth'
+    | '/trends'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComparisionRoute: typeof ComparisionRoute
+  ComparisonRoute: typeof ComparisonRoute
+  ForecastRoute: typeof ForecastRoute
+  GrowthRoute: typeof GrowthRoute
+  TrendsRoute: typeof TrendsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trends': {
+      id: '/trends'
+      path: '/trends'
+      fullPath: '/trends'
+      preLoaderRoute: typeof TrendsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/growth': {
+      id: '/growth'
+      path: '/growth'
+      fullPath: '/growth'
+      preLoaderRoute: typeof GrowthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forecast': {
+      id: '/forecast'
+      path: '/forecast'
+      fullPath: '/forecast'
+      preLoaderRoute: typeof ForecastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparison': {
+      id: '/comparison'
+      path: '/comparison'
+      fullPath: '/comparison'
+      preLoaderRoute: typeof ComparisonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparision': {
+      id: '/comparision'
+      path: '/comparision'
+      fullPath: '/comparision'
+      preLoaderRoute: typeof ComparisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +151,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComparisionRoute: ComparisionRoute,
+  ComparisonRoute: ComparisonRoute,
+  ForecastRoute: ForecastRoute,
+  GrowthRoute: GrowthRoute,
+  TrendsRoute: TrendsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,8 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import dataService from "../services/dataService.js";
-import { comparisionSchema, forecastSchema, growthSchema, trendQuerySchema } from "../schemas/trendsSchema.js";
+import { comparisionSchema, forecastSchema, growthSchema, SummarySchema, trendQuerySchema } from "../schemas/zodSchema.js";
 import { ApiError } from "../utils/apiError.js";
-import { ca } from "zod/v4/locales";
 
 type QueryParam = {
   year?: string;
@@ -12,7 +11,11 @@ type QueryParam = {
 
 export async function getSummaryStats(req: Request, res: Response, next: NextFunction) {
   try {
-    const { year, quarter, category } = req.query;
+    const parsed = SummarySchema.safeParse(req.query);
+    if (!parsed.success) {
+      throw new ApiError(400,  "Invalid query params", parsed.error.flatten())
+    }
+    const { year, quarter, category } = parsed.data;
 
     const parsedYear = year ? Number(year) : undefined;
     const parsedQuarter = typeof quarter === "string" ? quarter.toUpperCase() : undefined;;
@@ -34,10 +37,11 @@ export async function getTrends(req: Request, res: Response, next: NextFunction)
     if (!parsed.success) {
       throw new ApiError(400,  "Invalid query params", parsed.error.flatten())
     }
-    const { year, category, groupBy } = parsed.data;
+    const { year, category, quarter, groupBy } = parsed.data;
     const params = {
       year:year,
-      category:category
+      category:category,
+      quarter:quarter,
     }
     let data = {}
     if(groupBy=="month"){
@@ -45,7 +49,7 @@ export async function getTrends(req: Request, res: Response, next: NextFunction)
     } else {
       data = await dataService.getQuartrlyTrend(params)
     }
-    res.json({data})
+    res.json(data)
   } catch (err) {
     next(err); // forward errors to error-handling middleware
   }
@@ -82,7 +86,7 @@ export async function getComparision(req: Request, res: Response, next: NextFunc
       metric:metric,
       groupBy:groupBy,
     })
-    res.json({data})
+    res.json(data)
   } catch (err) {
     next(err); 
   }
@@ -101,7 +105,7 @@ export async function getGrowth(req: Request, res: Response, next: NextFunction)
       groupBy:groupBy,
       category:category,
     })
-    res.json({data})
+    res.json(data)
   } catch (err) {
     next(err); 
   }
@@ -120,7 +124,7 @@ export async function getForecast(req: Request, res: Response, next: NextFunctio
       groupBy:groupBy,
       category:category,
     })
-    res.json({data})
+    res.json(data)
   } catch (err) {
     next(err); 
   }

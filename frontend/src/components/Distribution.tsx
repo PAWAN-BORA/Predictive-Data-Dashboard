@@ -1,5 +1,4 @@
 import { useDistribution } from "@/hooks/useDistribution";
-import { Spinner } from "./ui/spinner";
 import DistributionPie from "./graph/DistributionPie";
 import { formatValue } from "@/lib/utils";
 import { useSearch } from "@tanstack/react-router";
@@ -53,7 +52,7 @@ export default function Distribution(){
   });
   const totalUnits = data!.reduce((sum, item) => sum + item.units, 0);
   return(
-    <div className="grid grid-cols-1 gap-4 p-6 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 py-6 lg:grid-cols-2">
       <DistributionPie title="Revenue Distribution" data={revenueData} total={`$${formatValue(totalRevenue)}`} centerText="Total Revenue"/>
       <DistributionPie title="Units Distribution" data={unitsData} total={`${formatValue(totalUnits)}`} centerText="Total Units"/>
     </div>

@@ -1,64 +1,27 @@
-import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { SlidersHorizontal, HelpCircle, LogOut, Download } from "lucide-react";
+import { HelpCircle, LogOut,   LayoutDashboard,
+  TrendingUp,
+  GitCompare,
+  Activity,
+  LineChart,
+} from "lucide-react";
+import { Link, useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
 import { Button } from "./ui/button";
-import { useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
+import { cn } from "@/lib/utils";
 
-const YEARS = [
-  { name: "2022", value: "2022" },
-  { name: "2023", value: "2023" },
-  { name: "2024", value: "2024" },
-  { name: "2025", value: "2025" },
+const SIDEBAR_ITEMS = [
+  { link: '/', label: 'Overview', icon: LayoutDashboard },
+  { link: '/trends', label: 'Trends', icon: TrendingUp },
+  { link: '/comparison', label: 'Comparison', icon: GitCompare },
+  { link: '/growth', label: 'Growth Rate', icon: Activity },
+  { link: '/forecast', label: 'Forecast', icon: LineChart },
+
 ];
 
-const QUARTERS = [
-  { name: "Quarter 1 (Q1)", value: "Q1" },
-  { name: "Quarter 2 (Q2)", value: "Q2" },
-  { name: "Quarter 3 (Q3)", value: "Q3" },
-  { name: "Quarter 4 (Q4)", value: "Q4" },
-];
-
-const CATEGORIES = [
-  { name: "Electronics", value: "Electronics" },
-  { name: "Clothing", value: "Clothing" },
-  { name: "Sports", value: "Sports" },
-  { name: "Home", value: "Home" },
-];
 export default function Sidebar() {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
-  const search = useSearch({ strict: false });
-  const navigate = useNavigate({from:"/"});
-  const year = search.year ?? "all";
-  const quarter = search.quarter ?? "all";
-  const category = search.category ?? "all";
-
-  const handleReset = () => {
-    navigate({
-      search: (prev) => ({
-        ...prev,
-        year: "all",
-        quarter: "all",
-        category: "all",
-      }),
-    });
-
-  };
-  const updateSearch = (key: string, value: string) => {
-    navigate({
-      search: (prev) => ({
-        ...prev,
-        [key]: value,
-      }),
-    });
-  };
+  console.log(pathname, 'this is path')
 
   return (
     <aside className="w-[280px] bg-white rounded-xl shadow-sm border-l border-r border-gray-100 flex flex-col font-sans h-[calc(100vh-75px)]">
@@ -73,113 +36,29 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="px-5 pt-5 pb-4 flex flex-col gap-4">
-        {/* Section Title */}
-        <div className="flex items-center gap-2">
-          <SlidersHorizontal className="w-4 h-4 text-blue-700" />
-          <span className="font-bold text-gray-800 text-base">
-            Advanced Filters
-          </span>
-        </div>
+      <nav className="flex-1 overflow-y-auto py-4 px-3">
+        {SIDEBAR_ITEMS.map((item) => {
+          const Icon = item.icon;
+          const isActive = pathname === item.link;
 
-        {/* Year */}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
-            Choose Year
-          </label>
-          <Select value={year} onValueChange={(val)=>updateSearch("year", val)}>
-            <SelectTrigger className="w-full bg-gray-50 border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:border-blue-400 hover:bg-blue-50 transition-all focus:ring-2 focus:ring-blue-200">
-              <SelectValue placeholder="Select year" />
-            </SelectTrigger>
-            <SelectContent className="rounded-xl shadow-lg border border-gray-200">
-              <SelectItem
-                value={"all"}
-                className="text-sm font-medium cursor-pointer"
+          return (
+            <Link to={item.link}>
+              <Button
+                key={item.link}
+                variant={isActive ? "secondary" : "ghost"}
+                className={cn(
+                  "justify-start gap-3 w-full cursor-pointer",
+                  isActive && "text-primary font-medium"
+                )}
+                // onClick={() => onChange(item.id)}
               >
-                All
-              </SelectItem>
-              {YEARS.map((y) => (
-                <SelectItem
-                  key={y.value}
-                  value={y.value}
-                  className="text-sm font-medium cursor-pointer"
-                >
-                  {y.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Quarter */}
-        <div className="flex flex-col gap-1.5">
-          <label className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
-            Choose Quarter
-          </label>
-          <Select value={quarter} onValueChange={(val)=>updateSearch("quarter", val)}>
-            <SelectTrigger className="w-full bg-gray-50 border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:border-blue-400 hover:bg-blue-50 transition-all focus:ring-2 focus:ring-blue-200">
-              <SelectValue placeholder="Select quarter" />
-            </SelectTrigger>
-            <SelectContent className="rounded-xl shadow-lg border border-gray-200">
-              <SelectItem
-                value={"all"}
-                className="text-sm font-medium cursor-pointer"
-              >
-                All
-              </SelectItem>
-              {QUARTERS.map((q) => (
-                <SelectItem
-                  key={q.value}
-                  value={q.value}
-                  className="text-sm font-medium cursor-pointer"
-                >
-                  {q.name}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        {/* Category */}
-        {pathname!=="/" && 
-          <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
-              Choose Category
-            </label>
-            <Select value={category} onValueChange={(val)=>updateSearch("category", val)}>
-              <SelectTrigger className="w-full bg-gray-50 border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:border-blue-400 hover:bg-blue-50 transition-all focus:ring-2 focus:ring-blue-200">
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent className="rounded-xl shadow-lg border border-gray-200">
-                <SelectItem
-                  value={"all"}
-                  className="text-sm font-medium cursor-pointer"
-                >
-                  All
-                </SelectItem>
-                {CATEGORIES.map((c) => (
-                  <SelectItem
-                    key={c.value}
-                    value={c.value}
-                    className="text-sm font-medium cursor-pointer"
-                  >
-                    {c.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        }
-        {/*  Reset */}
-        <Button
-          onClick={handleReset}
-          variant={"ghost"}
-          className="cursor-pointer"
-        >
-          Reset Filters 
-        </Button>
-      </div>
+                <Icon className="size-4" />
+                <span className="text-sm">{item.label}</span>
+              </Button>
+            </Link>
+          );
+        })}
+      </nav>
 
       {/* Divider */}
       <div className="border-t border-gray-100 mx-5" />

@@ -6,16 +6,16 @@ import { Outlet, createRootRoute } from '@tanstack/react-router'
 export const Route = createRootRoute({
   component: ()=>{
     return (
-      <>
-        <Header/>
-        <div className='flex gap-2'>
-          <Sidebar/>
-          <div className='flex-1'>
+      <div className="h-screen flex flex-col overflow-hidden">
+        <Header />
+        <div className="flex flex-1 overflow-hidden">
+          <Sidebar />
+          <div className="flex-1 overflow-y-auto p-6">
             <Outlet />
           </div>
         </div>
-        <Toaster />
-      </>
+        <Toaster position='top-right' richColors />
+      </div>
     )
   },
 })
