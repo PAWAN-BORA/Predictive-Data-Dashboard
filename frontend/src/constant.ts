@@ -6,7 +6,6 @@ export const YEARS = [
   { name: "2025", value: "2025" },
 ];
 
-
 export const CATEGORIES = [
   { name: "Electronics", value: "Electronics" },
   { name: "Clothing", value: "Clothing" },
@@ -20,4 +19,11 @@ export const QUARTERS = [
   { name: "Quarter 2 (Q2)", value: "Q2" },
   { name: "Quarter 3 (Q3)", value: "Q3" },
   { name: "Quarter 4 (Q4)", value: "Q4" },
+];
+
+
+export const METRICS = [
+  { name: "Revenue", value: "revenue" },
+  { name: "Profit", value: "profit" },
+  { name: "Unit", value: "units" },
 ];

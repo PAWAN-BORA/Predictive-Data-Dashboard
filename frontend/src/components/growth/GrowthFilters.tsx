@@ -1,25 +1,14 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Button } from "../ui/button";
 import { useNavigate, useSearch } from "@tanstack/react-router";
+import { METRICS } from "@/constant";
 
-//
-// const YEARS = [
-//   { name: "2022", value: "2022" },
-//   { name: "2023", value: "2023" },
-//   { name: "2024", value: "2024" },
-//   { name: "2025", value: "2025" },
-// ];
 
 const GROUP_BY = [
   { name: "Quarter", value: "quarter" },
   { name: "Month", value: "month" },
 ];
 
-const METRICS = [
-  { name: "Revenue", value: "revenue" },
-  { name: "Profit", value: "profit" },
-  { name: "Unit", value: "units" },
-];
 export default function GrowthFilters(){
 
   const search = useSearch({ strict: false });
@@ -52,28 +41,7 @@ export default function GrowthFilters(){
     <div className="pt-5 pb-4 flex flex-col gap-4">
       {/* Filters Row */}
       <div className="flex flex-wrap items-end gap-4">
-        {/* Year */}
-        {/* <div className="flex flex-col gap-1.5 min-w-[160px]"> */}
-        {/*   <label className="text-xs font-semibold tracking-widest text-gray-400 uppercase"> */}
-        {/*     Choose Year */}
-        {/*   </label> */}
-        {/*   <Select value={year} onValueChange={(val)=>updateSearch("year", val)}> */}
-        {/*     <SelectTrigger className="w-full bg-gray-50 border-gray-200 rounded-xl text-sm font-medium text-gray-700 hover:border-blue-400 hover:bg-blue-50 focus:ring-2 focus:ring-blue-200"> */}
-        {/*       <SelectValue placeholder="Select year" /> */}
-        {/*     </SelectTrigger> */}
-        {/*     <SelectContent> */}
-        {/*       <SelectItem value="all">All</SelectItem> */}
-        {/*       {YEARS.map((y) => ( */}
-        {/*         <SelectItem key={y.value} value={y.value}> */}
-        {/*           {y.name} */}
-        {/*         </SelectItem> */}
-        {/*       ))} */}
-        {/*     </SelectContent> */}
-        {/*   </Select> */}
-        {/* </div> */}
-
-
-        {/* Category */}
+        {/* Metric */}
           <div className="flex flex-col gap-1.5 min-w-[200px]">
             <label className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
               Choose Metric

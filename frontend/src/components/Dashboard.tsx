@@ -1,6 +1,4 @@
-import { useSearch } from "@tanstack/react-router";
 import Distribution from "./Distribution";
-import ProfitDistribution from "./graph/DistributionPie";
 import TopCards from "./TopCards";
 import DashboardFilters from "./DashboardFilters";
 import RevenueSnapshot from "./RevenueSnapshot";

@@ -3,7 +3,7 @@ import { fetcher } from "../lib/fetcher";
 import type { TrendParams } from "./useTrend";
 
 export type AISumamryData= {
-  text:string,
+  summary:string,
 };
 
 

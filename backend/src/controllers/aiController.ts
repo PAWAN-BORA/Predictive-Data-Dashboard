@@ -2,6 +2,7 @@ import { queryRequestSchema, trendQuerySchema } from "../schemas/zodSchema.js";
 import type { Request, Response, NextFunction } from "express";
 import { ApiError } from "../utils/apiError.js";
 import aiService from "../services/aiService.js";
+import dataService from "../services/dataService.js";
 
 export async function handleAIQuery(req: Request, res: Response, next:NextFunction) {
 
@@ -25,16 +26,20 @@ export async function getAISummary(req: Request, res: Response, next:NextFunctio
     if (!parsed.success) {
       throw new ApiError(400,  "Invalid query params", parsed.error.flatten())
     }
-    // const { year, category, quarter, groupBy } = parsed.data;
-    res.json({text:"this is test data for ai to generate."})
-    // const parsed = queryRequestSchema.safeParse(req.body);
-    // if (!parsed.success) {
-    //   throw new ApiError(400,  "Invalid query params", parsed.error.flatten())
-    // }
-    // const { query } = parsed.data;
-    // const result = await aiService.parseQuery(query);
-    //
-    // res.json(result);
+    const { year, category, quarter, groupBy } = parsed.data;
+    const params = {
+      year:year,
+      category:category,
+      quarter:quarter,
+    }
+    let data = {}
+    if(groupBy=="month"){
+      data = await dataService.getMonthlyTrend(params)
+    } else {
+      data = await dataService.getQuartrlyTrend(params)
+    }
+    const summaryData = await aiService.getSummary(data);
+    res.json(summaryData)
   } catch(err) {
     next(err); // forward errors to error-handling middleware
   }

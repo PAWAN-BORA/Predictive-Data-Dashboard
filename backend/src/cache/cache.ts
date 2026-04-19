@@ -58,3 +58,4 @@ class InMemoryCache<T> {
 }
 
 export const aiCache = new InMemoryCache<any>(1000);
+export const summaryCache = new InMemoryCache<any>(500);

@@ -115,14 +115,18 @@ export default function GrowthGraph({growthData}:GrowthGraphProps) {
           />
  
           <Tooltip
-            content={<GrowthTooltip />}
+            content={(props)=><GrowthTooltip {...props} />}
             cursor={{ fill: "#f8fafc", radius: 4 }}
           />
  
           <Bar
             dataKey="growth"
             radius={[3, 3, 3, 3]}
-            onMouseEnter={(data: GrowthDataPoint) => setActiveQuarter(data.quarter)}
+            onMouseEnter={(data) => {
+              if(data && data.payload){
+                setActiveQuarter(data.payload.quarter)
+              }
+            }}
           >
             {growthData.map((entry) => {
               const isActive = activeQuarter === null || activeQuarter === entry.quarter;

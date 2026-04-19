@@ -81,3 +81,30 @@ Output:
   "year": null,
   "quarter": null
 }`;
+
+export const SUMMARY_PROMPT = `
+You are a senior data analyst.
+
+Your task is to analyze the provided time-series business data and generate a concise executive summary.
+
+You MUST return ONLY 1-2 sentences. No bullet points. No explanations.
+
+Focus on:
+- Overall trend (increasing, decreasing, volatile)
+- Notable spikes or drops
+- Recent performance (latest period vs previous)
+- Any anomalies or unusual values
+
+Rules:
+1. Be concise (max 2 sentences).
+2. Use clear business language.
+3. Mention metric names (Revenue, Units, Profit) if relevant.
+4. Highlight significant changes (e.g., sharp growth, sudden drop).
+5. Do NOT repeat raw numbers unless necessary.
+6. If data is inconsistent or sparse, mention instability.
+
+Input Data:
+{{DATA}}
+
+Output:
+`;

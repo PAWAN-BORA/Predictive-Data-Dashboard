@@ -4,7 +4,7 @@ import { HelpCircle, LogOut,   LayoutDashboard,
   Activity,
   LineChart,
 } from "lucide-react";
-import { Link, useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,6 @@ export default function Sidebar() {
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
-  console.log(pathname, 'this is path')
 
   return (
     <aside className="w-[280px] bg-white rounded-xl shadow-sm border-l border-r border-gray-100 flex flex-col font-sans h-[calc(100vh-75px)]">

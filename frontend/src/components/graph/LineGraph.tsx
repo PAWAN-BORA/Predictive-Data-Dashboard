@@ -94,7 +94,7 @@ export default function LineGraph({ wholeData }:LineGraphProps) {
             axisLine={false}
             width={48}
           />
-          <Tooltip content={<CustomTooltip />} cursor={{ stroke: "#e2e8f0", strokeWidth: 1 }} />
+          <Tooltip content={(props)=><CustomTooltip {...props}/>} cursor={{ stroke: "#e2e8f0", strokeWidth: 1 }} />
           {!hiddenLines.revenue && (
             <Line
               yAxisId="left"
@@ -172,10 +172,10 @@ const CustomTooltip = ({ active, payload, label }:TooltipContentProps<ValueType,
 const formatRevenue = (value:number) => {
   if (value >= 1000000) return `${(value / 1000000).toFixed(1)}M`;
   if (value >= 1000) return `${(value / 1000).toFixed(0)}K`;
-  return value;
+  return value.toString();
 };
  
 const formatProfit = (value:number) => {
   if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
-  return value;
+  return value.toString();
 };

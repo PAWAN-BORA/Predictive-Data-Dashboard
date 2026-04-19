@@ -1,8 +1,9 @@
-import { aiCache } from "../cache/cache.js";
-import { QUERY_SYSTEM_PROMPT } from "../config/prompts.js";
+import { aiCache, summaryCache } from "../cache/cache.js";
+import { QUERY_SYSTEM_PROMPT, SUMMARY_PROMPT } from "../config/prompts.js";
 import { AIQuerySchema } from "../schemas/zodSchema.js";
 import { normalizeQuery } from "../utils/normalize.js";
 import { callOllama } from "./ollamaService.js";
+import crypto from "crypto";
 const TTL = 1000 * 60 * 60 * 24; 
 
 class AIServices {
@@ -58,6 +59,21 @@ JSON:
     }
   }
 
+  async getSummary(data:{[key:string]:string[]}){
+    const hash = crypto
+    .createHash("sha256")
+    .update(JSON.stringify(data))
+    .digest("hex");
+    const key = `summary:${hash}`;
+    const cached = summaryCache.get(key);
+    if (cached) {
+      return { summary:cached, source: "cache" };
+    }
+    const prompt = SUMMARY_PROMPT.replace("{{DATA}}", JSON.stringify(data))  
+    const summary = await callOllama(prompt);
+    summaryCache.set(key, summary, TTL);
+    return {summary:summary, source:"ai"};
+  }
 
 }
 export default new AIServices()

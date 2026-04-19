@@ -3,9 +3,6 @@ import { Button } from "../ui/button";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { CATEGORIES, QUARTERS, YEARS } from "@/constant";
 
-
-;
-
 const GROUP_BY = [
   { name: "Quarter", value: "quarter" },
   { name: "Month", value: "month" },

@@ -2,7 +2,8 @@ type FetchOptions = RequestInit & {
   params?: Record<string, string | number>;
 };
 
-const BASE_URL = "http://localhost:3000/api/v1";
+const API_URL = import.meta.env.VITE_API_URL
+const BASE_URL = `${API_URL}/api/v1`;
 export async function fetcher<T>(
   urlPart: string,
   options: FetchOptions = {}

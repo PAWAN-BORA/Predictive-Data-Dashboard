@@ -9,7 +9,7 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
-import type { TooltipProps } from "recharts";
+import type { TooltipContentProps } from "recharts";
 import type { NameType, ValueType } from "recharts/types/component/DefaultTooltipContent";
 import type { ForecastDataPoint } from "../forecast/Forecast";
 
@@ -126,7 +126,7 @@ export default function ForecastGraph({forecastData}:ForecastGraphProps) {
             }}
           />
 
-          <Tooltip content={<ForecastTooltip />} cursor={{ stroke: "#e2e8f0", strokeWidth: 1 }} />
+          <Tooltip content={(props)=><ForecastTooltip {...props} />} cursor={{ stroke: "#e2e8f0", strokeWidth: 1 }} />
           <Legend content={<ChartLegend />} />
 
           {/* Actual — solid */}
@@ -162,7 +162,7 @@ export default function ForecastGraph({forecastData}:ForecastGraphProps) {
 
 // ─── Tooltip ──────────────────────────────────────────────────────────────────
 
-function ForecastTooltip({ active, payload, label }: TooltipProps<ValueType, NameType>) {
+function ForecastTooltip({ active, payload, label }: TooltipContentProps<ValueType, NameType>) {
   if (!active || !payload?.length) return null;
 
   return (

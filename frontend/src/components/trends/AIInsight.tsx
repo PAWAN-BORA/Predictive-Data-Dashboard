@@ -1,6 +1,4 @@
 import { Sparkles, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useState } from "react";
 import TypingSkeleton from "../common/TypingSkeleton";
 import { useAISummary } from "@/hooks/useAISummary";
 import { useSearch } from "@tanstack/react-router";
@@ -58,7 +56,7 @@ export default function AISummary() {
               </div>
               :
               <p className="mt-2 text-sm text-foreground leading-relaxed">
-                {data?.text} 
+                {data?.summary} 
               </p>
           )}
       </div>

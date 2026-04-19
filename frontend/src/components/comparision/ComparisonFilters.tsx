@@ -1,25 +1,15 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Button } from "../ui/button";
 import { useNavigate, useSearch } from "@tanstack/react-router";
+import { METRICS, YEARS } from "@/constant";
 
 
-const YEARS = [
-  { name: "2022", value: "2022" },
-  { name: "2023", value: "2023" },
-  { name: "2024", value: "2024" },
-  { name: "2025", value: "2025" },
-];
 
 const GROUP_BY = [
   { name: "Quarter", value: "quarter" },
   { name: "Month", value: "month" },
 ];
 
-const METRICS = [
-  { name: "Revenue", value: "revenue" },
-  { name: "Profit", value: "profit" },
-  { name: "Unit", value: "units" },
-];
 export default function ComparisonFilters(){
 
   const search = useSearch({ strict: false });
@@ -73,7 +63,7 @@ export default function ComparisonFilters(){
         </div>
 
 
-        {/* Category */}
+        {/* Metric */}
           <div className="flex flex-col gap-1.5 min-w-[200px]">
             <label className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
               Choose Metric
@@ -92,7 +82,7 @@ export default function ComparisonFilters(){
             </Select>
           </div>
 
-        {/* Category */}
+        {/* GroupBy */}
           <div className="flex flex-col gap-1.5 min-w-[200px]">
             <label className="text-xs font-semibold tracking-widest text-gray-400 uppercase">
                Group By

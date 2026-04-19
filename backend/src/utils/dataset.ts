@@ -177,6 +177,49 @@ export const dataset = [
   { "id": 2682, "date": "2024-12-13", "quarter": "Q4", "category": "Electronics", "revenue": 28000, "units": 125, "profit": 9800, "region": "North" },
   { "id": 2683, "date": "2024-12-14", "quarter": "Q4", "category": "Sports", "revenue": 43000, "units": 860, "profit": 17200, "region": "West" },
   { "id": 2684, "date": "2024-12-15", "quarter": "Q4", "category": "Home", "revenue": 15500, "units": 103, "profit": 4650, "region": "South" },
-  { "id": 2685, "date": "2024-12-15", "quarter": "Q4", "category": "Clothing", "revenue": 23000, "units": 920, "profit": 6900, "region": "East" }
+  { "id": 2685, "date": "2024-12-15", "quarter": "Q4", "category": "Clothing", "revenue": 23000, "units": 920, "profit": 6900, "region": "East" },
 
+  { "id": 2686, "date": "2025-01-01", "quarter": "Q1", "category": "Electronics", "revenue": 25000, "units": 105, "profit": 8750, "region": "North" },
+  { "id": 2687, "date": "2025-01-01", "quarter": "Q1", "category": "Sports", "revenue": 21000, "units": 420, "profit": 8400, "region": "West" },
+  { "id": 2688, "date": "2025-01-15", "quarter": "Q1", "category": "Clothing", "revenue": 11500, "units": 460, "profit": 3450, "region": "East" },
+  { "id": 2689, "date": "2025-01-15", "quarter": "Q1", "category": "Home", "revenue": 10500, "units": 70, "profit": 3150, "region": "South" },
+  { "id": 2690, "date": "2025-02-01", "quarter": "Q1", "category": "Electronics", "revenue": 23000, "units": 95, "profit": 8050, "region": "North" },
+  { "id": 2691, "date": "2025-02-01", "quarter": "Q1", "category": "Sports", "revenue": 19500, "units": 390, "profit": 7800, "region": "West" },
+  { "id": 2692, "date": "2025-02-15", "quarter": "Q1", "category": "Clothing", "revenue": 10800, "units": 432, "profit": 3240, "region": "East" },
+  { "id": 2693, "date": "2025-02-15", "quarter": "Q1", "category": "Home", "revenue": 9800, "units": 65, "profit": 2940, "region": "South" },
+  { "id": 2694, "date": "2025-03-01", "quarter": "Q1", "category": "Electronics", "revenue": 24500, "units": 100, "profit": 8575, "region": "North" },
+  { "id": 2695, "date": "2025-03-15", "quarter": "Q1", "category": "Clothing", "revenue": 11200, "units": 448, "profit": 3360, "region": "East" },
+
+  // 2025 Q2 - Top Performer: Home
+  { "id": 2696, "date": "2025-04-01", "quarter": "Q2", "category": "Home", "revenue": 28500, "units": 190, "profit": 8550, "region": "South" },
+  { "id": 2697, "date": "2025-04-01", "quarter": "Q2", "category": "Electronics", "revenue": 14000, "units": 58, "profit": 4900, "region": "North" },
+  { "id": 2698, "date": "2025-04-15", "quarter": "Q2", "category": "Home", "revenue": 29200, "units": 195, "profit": 8760, "region": "South" },
+  { "id": 2699, "date": "2025-04-15", "quarter": "Q2", "category": "Clothing", "revenue": 16500, "units": 660, "profit": 4950, "region": "East" },
+  { "id": 2700, "date": "2025-05-01", "quarter": "Q2", "category": "Sports", "revenue": 17500, "units": 350, "profit": 7000, "region": "West" },
+  { "id": 2701, "date": "2025-05-01", "quarter": "Q2", "category": "Home", "revenue": 31000, "units": 205, "profit": 9300, "region": "South" },
+  { "id": 2702, "date": "2025-05-15", "quarter": "Q2", "category": "Electronics", "revenue": 15000, "units": 62, "profit": 5250, "region": "North" },
+  { "id": 2703, "date": "2025-06-01", "quarter": "Q2", "category": "Home", "revenue": 33000, "units": 220, "profit": 9900, "region": "South" },
+  { "id": 2704, "date": "2025-06-15", "quarter": "Q2", "category": "Sports", "revenue": 18000, "units": 360, "profit": 7200, "region": "West" },
+  { "id": 2705, "date": "2025-06-15", "quarter": "Q2", "category": "Electronics", "revenue": 15500, "units": 64, "profit": 5425, "region": "North" },
+
+  // 2025 Q3 - Top Performer: Home
+  { "id": 2706, "date": "2025-07-01", "quarter": "Q3", "category": "Home", "revenue": 32500, "units": 215, "profit": 9750, "region": "South" },
+  { "id": 2707, "date": "2025-07-01", "quarter": "Q3", "category": "Clothing", "revenue": 17500, "units": 700, "profit": 5250, "region": "East" },
+  { "id": 2708, "date": "2025-07-15", "quarter": "Q3", "category": "Electronics", "revenue": 16000, "units": 66, "profit": 5600, "region": "North" },
+  { "id": 2709, "date": "2025-08-01", "quarter": "Q3", "category": "Home", "revenue": 34000, "units": 225, "profit": 10200, "region": "South" },
+  { "id": 2710, "date": "2025-08-01", "quarter": "Q3", "category": "Sports", "revenue": 19000, "units": 380, "profit": 7600, "region": "West" },
+  { "id": 2711, "date": "2025-08-15", "quarter": "Q3", "category": "Home", "revenue": 33500, "units": 220, "profit": 10050, "region": "South" },
+  { "id": 2712, "date": "2025-09-01", "quarter": "Q3", "category": "Clothing", "revenue": 18200, "units": 728, "profit": 5460, "region": "East" },
+  { "id": 2713, "date": "2025-09-15", "quarter": "Q3", "category": "Electronics", "revenue": 17000, "units": 70, "profit": 5950, "region": "North" },
+  { "id": 2714, "date": "2025-09-15", "quarter": "Q3", "category": "Home", "revenue": 35000, "units": 230, "profit": 10500, "region": "South" },
+
+  // 2025 Q4 - Top Performer: Sports
+  { "id": 2715, "date": "2025-10-01", "quarter": "Q4", "category": "Sports", "revenue": 32000, "units": 640, "profit": 12800, "region": "West" },
+  { "id": 2716, "date": "2025-10-01", "quarter": "Q4", "category": "Electronics", "revenue": 24000, "units": 100, "profit": 8400, "region": "North" },
+  { "id": 2717, "date": "2025-10-15", "quarter": "Q4", "category": "Home", "revenue": 18000, "units": 120, "profit": 5400, "region": "South" },
+  { "id": 2718, "date": "2025-11-01", "quarter": "Q4", "category": "Sports", "revenue": 38000, "units": 760, "profit": 15200, "region": "West" },
+  { "id": 2719, "date": "2025-11-15", "quarter": "Q4", "category": "Electronics", "revenue": 28000, "units": 115, "profit": 9800, "region": "North" },
+  { "id": 2720, "date": "2025-12-01", "quarter": "Q4", "category": "Sports", "revenue": 46000, "units": 920, "profit": 18400, "region": "West" },
+  { "id": 2721, "date": "2025-12-15", "quarter": "Q4", "category": "Clothing", "revenue": 25000, "units": 1000, "profit": 7500, "region": "East" },
+  { "id": 2722, "date": "2025-12-15", "quarter": "Q4", "category": "Electronics", "revenue": 32000, "units": 130, "profit": 11200, "region": "North" }
 ]
