@@ -158,3 +158,110 @@ npm run clean
   ```
 ---
 
+### AI Prompting Strategy
+
+This system uses **structured prompt engineering** to ensure deterministic, reliable, and parseable outputs from the LLM. The design separates responsibilities into two distinct prompt types.
+
+---
+
+#### 1. Query Interpretation Prompt
+
+**Purpose**: Convert natural language into strict JSON.
+
+**Key Characteristics**:
+
+* Enforces a **fixed schema**
+* Restricts allowed values (queryType, metric, category)
+* Returns **only valid JSON** (no text, no markdown)
+* Handles ambiguity via `"invalid"` fallback
+
+**Techniques Used**:
+
+* Explicit schema definition inside prompt
+* Controlled vocabulary (enum-like constraints)
+* Rule-based classification (trend, comparison, growth, forecast)
+* Hard instructions: *“ONLY return JSON”*
+
+#### 2. Executive Summary Prompt
+
+**Purpose**: Generate concise business insights from structured data.
+
+**Key Characteristics**:
+
+* Output limited to **1–2 sentences**
+* Focus on:
+
+  * trend direction
+  * volatility
+  * recent performance
+* Avoids vague or fallback responses
+
+**Techniques Used**:
+
+* Forced brevity constraints
+* Bias toward **trend detection over uncertainty**
+* Explicit prohibition of:
+
+  * “insufficient data”
+  * unnecessary disclaimers
+
+--- 
+
+#### 3. Deterministic Output Enforcement
+
+To ensure reliability:
+
+* All AI responses are validated using **Zod schemas**
+* Invalid or malformed outputs are replaced with a safe fallback
+* No direct trust is placed in LLM output
+
+---
+
+#### 4. Dynamic Prompt Injection
+
+Prompts are dynamically constructed at runtime:
+
+* Dataset injected via `{{DATA}}`
+* Time granularity injected via `{{GRANULARITY}}`
+* Category constraints injected from backend constants
+
+This ensures:
+
+* Context-aware responses
+* Reduced hallucination
+* Consistency with backend data model
+
+---
+
+#### 5. Caching Strategy for Prompts
+
+* Query prompts → cached using normalized query string
+* Summary prompts → cached using hashed dataset + granularity
+
+This reduces:
+
+* LLM latency
+* Cost of repeated inference
+
+---
+
+#### 6. Design Principles
+
+* **Separation of Concerns**
+
+  * Query parsing ≠ insight generation
+
+* **Strict Contracts**
+
+  * JSON schema enforced at prompt + validation level
+
+* **Fail-Safe Defaults**
+
+  * Invalid queries return structured null response
+
+* **Performance First**
+
+  * Cache before LLM call
+  * Rate-limit expensive endpoints
+
+---
