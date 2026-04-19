@@ -1,75 +1,97 @@
-# React + TypeScript + Vite
+## Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React-based frontend for a data analytics dashboard that visualizes revenue, units, and profit across multiple dimensions (time, category, region). It consumes REST APIs and renders dynamic charts with filtering and forecasting capabilities.
 
-Currently, two official plugins are available:
+---
+### Installation & Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+# Install dependencies
+cd frontend
+npm install
 
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Configure environment
+cp .env.example .env  # VITE_API_URL=http://localhost:3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Development mode
+npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Production build
+npm run build
+
+# Preview production build
+npm run preview
+
+# Lint code
+npm run lint
 ```
+
+### Folder Structure
+
+```
+src/
+├── components/     # Reusable UI components
+├── hooks/          # Custom React hooks
+├── lib/            # Utility functions and API clients
+├── routes/         # Application routes
+└── types/          # TypeScript type definitions
+```
+### Dynamic Charts
+
+* Trend (Line chart)
+* Comparison (Bar / Stacked bar)
+* Breakdown (Pie / Donut)
+* Growth (Line with %)
+* Forecast (Actual vs Predicted)
+
+---
+
+### Filters (URL-driven)
+
+Filters are controlled via URL query params:
+
+```
+?metric=revenue&groupBy=quarter&category=electronics&region=north
+```
+
+### Major Packages & Libraries
+
+- **React 19** + **React DOM** - UI library
+- **TanStack React Query** - Data fetching and state synchronization
+- **TanStack React Router** - Type-safe routing
+- **Tailwind CSS** - Utility-first CSS framework
+- **Recharts** - Data visualization charts
+- **Sonner** - Toast notifications
+- **Shadcn/ui** - Accessible UI components
+- **Lucide React** - Icon library
+
+### Data Flow
+
+1. **API Layer** (`src/lib/`) - Custom fetch function configured with base URL
+2. **React Query Hooks** (`src/hooks/`) - Encapsulate API calls with caching
+3. **Components** (`src/components/`) - UI consuming state and hooks
+4. **Routes** (`src/routes/`) - Page-level components with data requirements
+
+### Key Patterns
+
+- **Custom Hooks**: Encapsulate data fetching logic with React Query
+- **API Abstraction**: Centralized API client with interceptors
+- **State Separation**: Server state (React Query) vs client state (Zustand)
+- **Type Safety**: End-to-end TypeScript with API route types
+- **Optimistic Updates**: Automatic cache invalidation and updates
+
+## Project Overview
+
+This predictive data dashboard combines:
+- **Backend**: Node.js/Express API with AI integration (Ollama)
+- **Frontend**: Modern React stack with TanStack ecosystem
+- **Features**: Data processing, AI insights, interactive visualizations
+- **Performance**: Efficient caching, optimized builds, lazy loading
+
+The application enables users to upload data, process it through AI models, and visualize predictive insights in real-time.
+
+
