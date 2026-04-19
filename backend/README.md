@@ -222,7 +222,6 @@ To ensure reliability:
 Prompts are dynamically constructed at runtime:
 
 * Dataset injected via `{{DATA}}`
-* Time granularity injected via `{{GRANULARITY}}`
 * Category constraints injected from backend constants
 
 This ensures:
